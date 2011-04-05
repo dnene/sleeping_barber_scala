@@ -1,0 +1,20 @@
+*.class
+*.log
+#eclipse IDE specifics
+.classpath
+.project
+.scala_dependencies
+.settings
+
+# No jars being checked in
+lib/
+
+# sbt specific
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+

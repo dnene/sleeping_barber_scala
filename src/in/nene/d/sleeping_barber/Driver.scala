@@ -22,8 +22,15 @@ object Driver {
 							Supervise(waitingRoom, Permanent) :: 
 								Supervise(barber, Permanent) :: 
 								Nil)).newInstance
+
 		supervisor.start
+		println("----------------")
 		Thread.sleep(2000)
+		for(actorRef <-  registry.actors)
+			println(actorRef)
+        // Note: Passing a reference to an actor at startup
+        // is not good enough since it will be invalid when the
+        // supervisor restarts a failed actor
 		waitingRoom ! barber
 		for(i <- 1 to 20) {
 			waitingRoom ! new Customer(i)

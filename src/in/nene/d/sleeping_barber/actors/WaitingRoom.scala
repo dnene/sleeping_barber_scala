@@ -15,6 +15,10 @@ class WaitingRoom (val size: Int) extends Actor {
 	// Not sure how to handle this deferred initialisation of the barber actor in an idiomatic scala way
 	var _barber: ActorRef = null
 	def barber =
+        // Note: This is not good enough. The reference to the barber will
+        // become invalid if the supervisor restarts the barber. Ideally 
+        // should be looked up before each call and not cached as I am doing
+        // here
 		if (_barber != null) _barber else {
 			_barber =  registry.actorsFor("in.nene.d.sleeping_barber.actors.Barber")(0)	
 			_barber
